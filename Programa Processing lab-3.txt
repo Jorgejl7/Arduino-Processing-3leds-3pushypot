@@ -1,0 +1,21 @@
+import processing.serial.*;
+
+Serial myPort;  // crea una variable para el puerto serial
+
+void setup() {
+  size(450, 200);  // establece el tamaño de la ventana
+  // abre el puerto serial a una velocidad de 9600 baudios
+  myPort = new Serial(this, "COM3", 9600); 
+}
+
+void draw() {
+  background(255,215,0); // Fondo blanco
+  fill(255, 0, 0); // Texto en negro
+  textSize(24); // Tamaño de letra
+  
+    String data = myPort.readStringUntil('\n'); // lee los datos hasta que se encuentra con un salto de línea
+    if (data != null) { // si los datos no son nulos
+      text("El valor del Potenciometro es: " + data, 50, 100); // imprime los datos en la consola de Processing
+    }
+  
+}
